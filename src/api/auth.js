@@ -7,7 +7,7 @@ export function login(data) {
 
 // 用户注册
 export function register(data) {
-  return post('/auth/register', data)
+  return post('/api/register', data)
 }
 
 // 忘记密码
