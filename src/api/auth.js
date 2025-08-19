@@ -2,12 +2,12 @@ import { post } from '../utils/request'
 
 // 用户登录
 export function login(data) {
-  return post('/auth/login', data)
+  return post('/users/login', data)
 }
 
 // 用户注册
 export function register(data) {
-  return post('/api/register', data)
+  return post('/users/register', data)
 }
 
 // 忘记密码

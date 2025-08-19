@@ -46,8 +46,8 @@ service.interceptors.response.use(
       
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
-      // 直接返回数据或者res.data，取决于后端的数据结构
-      return res.data || res
+      // 直接返回数据
+      return res
     }
   },
   error => {
@@ -60,7 +60,7 @@ service.interceptors.response.use(
         case 401:
           // 未授权，重定向到登录页
           localStorage.removeItem('token')
-          window.location.href = '/login'
+          // window.location.href = '/login'
           break
         case 403:
           // 禁止访问
@@ -84,8 +84,7 @@ service.interceptors.response.use(
       // 请求配置出错
       console.error('请求配置错误:', error.message)
     }
-    
-    return Promise.reject(error)
+    return Promise.reject(error.response)
   }
 )
 

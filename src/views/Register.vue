@@ -19,6 +19,7 @@
         <a-form
           :model="formData"
           :rules="rules"
+          ref="formRef"
           @finish="handleRegister"
           layout="vertical"
           class="register-form"
@@ -103,10 +104,6 @@ import {
   UserOutlined, 
   LockOutlined, 
   MailOutlined, 
-  PhoneOutlined,
-  MonitorOutlined,
-  SafetyOutlined,
-  CloudOutlined
 } from '@ant-design/icons-vue'
 import { message } from 'ant-design-vue'
 import { register } from '@/api/auth'
@@ -190,9 +187,10 @@ const handleRegister = async () => {
     }
     
     const response = await register(registerData)
-    
+    console.log(response)
     if (response.code === 200) {
       message.success('注册成功！请登录')
+      console.log(formRef.value)
       // 清空表单
       formRef.value.resetFields()
       Object.assign(formData, {
