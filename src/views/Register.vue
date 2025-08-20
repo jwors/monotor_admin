@@ -91,7 +91,7 @@
         </a-form>
 
         <div class="register-footer">
-          <p>已有账户？ <router-link to="/login">立即登录</router-link></p>
+          <p>已有账户？ <router-link to="/auth/login">立即登录</router-link></p>
         </div>
       </div>
     </div>
@@ -109,7 +109,9 @@ import { message } from 'ant-design-vue'
 import { register } from '@/api/auth'
 
 // 定义emit事件
-const emit = defineEmits(['switch-to-login'])
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 // 表单引用
 const formRef = ref()
@@ -202,7 +204,7 @@ const handleRegister = async () => {
         agreement: false
       })
       // 切换到登录界面
-      emit('switch-to-login')
+        router.push('/auth/login')
     } else {
       message.error(response.message || '注册失败，请重试')
     }
@@ -220,7 +222,7 @@ const handleRegister = async () => {
 
 // 切换到登录
 const handleLogin = () => {
-  emit('switch-to-login')
+  router.push('/auth/login')
 }
 </script>
 

@@ -1,37 +1,13 @@
 <template>
   <div class="auth-container">
     <transition name="slide-fade" mode="out-in">
-      <Login 
-        v-if="currentView === 'login'" 
-        @switch-to-register="switchToRegister"
-        key="login"
-      />
-      <Register 
-        v-else 
-        @switch-to-login="switchToLogin"
-        key="register"
-      />
+      <router-view />
     </transition>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import Login from './Login.vue'
-import Register from './Register.vue'
-
-// 当前视图状态
-const currentView = ref('login')
-
-// 切换到注册界面
-const switchToRegister = () => {
-  currentView.value = 'register'
-}
-
-// 切换到登录界面
-const switchToLogin = () => {
-  currentView.value = 'login'
-}
+// 认证页面布局容器，使用路由系统
 </script>
 
 <style scoped>

@@ -73,7 +73,7 @@
         <div class="login-footer">
           <p>
             还没有账户？
-            <a href="#" @click.prevent="handleRegister">立即注册</a>
+            <router-link to="/auth/register">立即注册</router-link>
           </p>
         </div>
       </div>
@@ -83,12 +83,15 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { message } from 'ant-design-vue'
 import { login } from '../api/auth'
 
 // 定义emit事件
-const emit = defineEmits(['switch-to-register'])
+
+// 定义router
+const router = useRouter()
 
 // 响应式数据
 const loading = ref(false)
@@ -115,22 +118,23 @@ const handleLogin = async (values) => {
   loading.value = true
   try {
     // 调用登录API
-    const response = await login(values)
-    
+    const {data} = await login(values)
     // 保存token
-    if (response.token) {
-      localStorage.setItem('token', response.token)
+    if (data.token) {
+      localStorage.setItem('token', data.token)
     }
     
     // 保存用户信息
-    if (response.userInfo) {
-      localStorage.setItem('userInfo', JSON.stringify(response.userInfo))
+    if (data.user) {
+      localStorage.setItem('userInfo', JSON.stringify(data.user))
     }
     
     message.success('登录成功！')
     
     // 这里可以跳转到主页面
-    // router.push('/dashboard')
+    router.push({
+      path: '/dashboard'
+    })
     
   } catch (error) {
     console.error('登录失败:', error.re)
@@ -140,21 +144,6 @@ const handleLogin = async (values) => {
   }
 }
 
-// 登录失败处理
-const handleLoginFailed = (errorInfo) => {
-  console.log('登录验证失败:', errorInfo)
-  message.error('请检查输入信息')
-}
-
-// 忘记密码处理
-const handleForgotPassword = () => {
-  message.info('请联系管理员重置密码')
-}
-
-// 注册处理
-const handleRegister = () => {
-  emit('switch-to-register')
-}
 </script>
 
 <style scoped>

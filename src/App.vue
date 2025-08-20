@@ -1,9 +1,9 @@
 <script setup>
-import Auth from './views/Auth.vue'
+// 使用路由系统，不需要直接导入组件
 </script>
 
 <template>
-  <Auth />
+  <router-view />
 </template>
 
 <style>
