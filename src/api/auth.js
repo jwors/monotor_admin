@@ -1,4 +1,4 @@
-import { post } from '../utils/request'
+import { get, post } from '../utils/request'
 
 // 用户登录
 export function login(data) {
@@ -28,4 +28,9 @@ export function getUserInfo() {
 // 刷新token
 export function refreshToken(data) {
   return post('/auth/refresh-token', data)
+}
+
+// 测试接口
+export function test() {
+  return get('/errors/test')
 }

@@ -75,6 +75,15 @@ const routes = [
     }
   },
   {
+    path: '/error-test',
+    name: 'ErrorTest',
+    component: () => import('@/views/ErrorPage.vue'),
+    meta: {
+      title: '错误测试',
+      requiresAuth: true
+    }
+  },
+  {
     path: '/profile',
     name: 'Profile',
     component: () => import('@/views/Profile.vue'),

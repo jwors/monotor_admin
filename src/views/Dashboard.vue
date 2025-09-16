@@ -51,6 +51,7 @@
       <div class="action-buttons">
         <a-button type="primary" @click="goToMonitor">进入监控中心</a-button>
         <a-button @click="goToSystem">系统管理</a-button>
+        <a-button @click="goToErrorTest" danger>错误测试</a-button>
         <a-button @click="logout">退出登录</a-button>
       </div>
     </div>
@@ -68,9 +69,20 @@ const goToMonitor = () => {
   router.push('/monitor')
 }
 
+// 测试错误
+const testError = () => {
+ router.push('/errorPage')
+ // throw new Error('This is a test error.')
+}
+
 // 跳转到系统管理
 const goToSystem = () => {
   router.push('/system')
+}
+
+// 跳转到错误测试页面
+const goToErrorTest = () => {
+  router.push('/error-test')
 }
 
 // 退出登录
